@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Car Visualizer Demo</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body, html { height: 100%; font-family: Arial, sans-serif; background: #0b1220; color: #fff; }
+
+  /* Center container */
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    padding: 20px;
+    transition: opacity 0.15s ease; /* fast fade-out */
+  }
+
+  h1 { font-size: 24px; margin-bottom: 15px; }
+  p { font-size: 14px; opacity: 0.8; margin-bottom: 25px; }
+
+  /* Button */
+  .open-btn {
+    padding: 14px 30px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(90deg,#06b6d4,#3b82f6);
+    color: #021124;
+    box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+    transition: transform .1s ease;
+  }
+  .open-btn:active { transform: scale(0.98); }
+
+  /* Fullscreen iframe */
+  #carFrame {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    border: none;
+    opacity: 0;
+    transition: opacity 0.15s ease; /* fast fade-in */
+  }
+</style>
+</head>
+<body>
+
+<div class="container" id="launchSection">
+  <h1>3D Car Visualizer Demo</h1>
+  <p>Click the button below to launch the 3D Car Visualizer</p>
+  <button class="open-btn" id="openBtn">Click Here</button>
+</div>
+
+<iframe id="carFrame" src=""></iframe>
+
+<script>
+  const btn = document.getElementById('openBtn');
+  const iframe = document.getElementById('carFrame');
+  const launchSection = document.getElementById('launchSection');
+
+  btn.addEventListener('click', () => {
+    // Fade out launch section quickly
+    launchSection.style.opacity = 0;
+
+    setTimeout(() => {
+      launchSection.style.display = 'none';
+      // Show iframe and fade in quickly
+      iframe.style.display = 'block';
+      iframe.src = "https://carvisualizer.plus360degrees.com/threejs/";
+      setTimeout(() => { iframe.style.opacity = 1; }, 20); // tiny delay for transition
+    }, 150); // fast fade-out duration
+  });
+</script>
+
+</body>
+</html>
